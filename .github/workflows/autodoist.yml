@@ -26,4 +26,4 @@ jobs:
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # Optional
       run: |
-        python python autodoist.py
+        python autodoist.py
