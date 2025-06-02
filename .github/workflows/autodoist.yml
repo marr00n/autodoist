@@ -1,9 +1,9 @@
-name: Run Autodoist
+name: Run Autodoist with CLI
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # Every 30 minutes
-  workflow_dispatch:        # Allows manual trigger
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
 
 jobs:
   run-autodoist:
@@ -18,12 +18,10 @@ jobs:
         python-version: '3.10'
 
     - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      run: pip install -r requirements.txt
 
-    - name: Run Autodoist
+    - name: Run Autodoist with label filter
       env:
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}  # Optional
       run: |
-        python autodoist.py
+        python autodoist.py -a $TODOIST_API_KEY -l "@next_action"
