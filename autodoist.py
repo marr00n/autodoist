@@ -18,6 +18,21 @@ import sqlite3
 import os
 import re
 import json
+import signal
+import sys
+
+# Graceful timeout handler
+def timeout_handler(signum, frame):
+    print("⏰ Script timeout reached — exiting.")
+    sys.exit(0)
+
+# Set timeout duration (in seconds)
+TIMEOUT_DURATION = 240  # 4 minutes
+
+# Register the handler
+signal.signal(signal.SIGALRM, timeout_handler)
+signal.alarm(TIMEOUT_DURATION)
+
 
 # Connect to SQLite database
 
