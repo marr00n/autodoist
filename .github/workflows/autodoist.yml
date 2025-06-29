@@ -20,16 +20,6 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-     - name: Reset metadata.sqlite (manual runs only)
-          if: github.event_name == 'workflow_dispatch'
-          run: |
-            if [ -f metadata.sqlite ]; then
-              echo "🗑️ Deleting existing metadata.sqlite for clean reset"
-              rm metadata.sqlite
-            else
-              echo "No metadata.sqlite file found"
-            fi
-
     - name: Run Autodoist with label filter
       env:
         TODOIST_API_KEY: ${{ secrets.TODOIST_API_KEY }}
